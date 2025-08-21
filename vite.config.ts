@@ -6,7 +6,11 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      '/api': 'http://node-alb-567088048.ap-south-1.elb.amazonaws.com/'
+      '/api': {
+        target: import.meta.env.VITE_API_URL, // <- directly use Vite env
+        changeOrigin: true,
+        secure: false
+      }
     }
   }
 })
