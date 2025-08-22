@@ -6,11 +6,7 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      '/api': {
-        target: import.meta.env.VITE_API_URL, // <- directly use Vite env
-        changeOrigin: true,
-        secure: false
-      }
+      '/api': process.env.VITE_API_URL || 'http://localhost:3000'
     }
   }
 })
