@@ -1,23 +1,14 @@
 version: 0.2
+
 phases:
   install:
-    runtime-versions:
-      nodejs: 18
     commands:
-      - echo Installing dependencies...
-      - npm ci
+      - npm install
   build:
     commands:
-      - echo Building frontend...
+      - echo "VITE_API_URL=$API_BASE_URL" > .env   # for Vite/React
       - npm run build
-  post_build:
-    commands:
-      - echo Deploying to S3...
-      - aws s3 sync ./dist/ s3://$FRONTEND_BUCKET --delete --exact-timestamps
-      - echo Invalidating CloudFront cache...
-      - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
-
 artifacts:
   files:
     - '**/*'
-  base-directory: dist  # 👈 Important: Only inc
+  base-directory: dist
