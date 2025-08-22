@@ -79,7 +79,7 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1>ToDo App</h1>
+      <h1>ToDo App - V2</h1>
 
       <form onSubmit={addTodo} className="add-form">
         <input value={title} onChange={e=>setTitle(e.target.value)} placeholder="Title" />
